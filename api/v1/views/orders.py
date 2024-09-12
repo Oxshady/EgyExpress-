@@ -6,4 +6,7 @@ from models.Order import Order
 @api_v1.route('/orders', methods=['GET'])
 def get_orders():
     """ Get all orders """
-    return jsonify([order.to_dict() for order in storage.get_all("Order")])
+    orders = storage.get_all("Order")
+    if orders is None:
+        return jsonify([])
+    return jsonify([order.to_dict() for order in orders])
