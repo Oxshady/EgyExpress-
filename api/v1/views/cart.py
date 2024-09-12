@@ -7,22 +7,23 @@ from models.Cart import Cart
 def get_Cart():
     """ Get Cart """
     if request.method == 'GET':
-        data = request.get_json()
-        user_id = data.get('user_id')
+        from models.users import User
+        sess = storage.get_session()
+        user = sess.query(User).first()
+        user_id = user.id
         if user_id is None:
             return jsonify([])
-        cart = storage.__session.query(Cart).filter_by(user_id=user_id).first()
+        cart = sess.query(Cart).filter_by(user_id=user_id).first()
         if cart is None:
             return jsonify([])
-        for item in cart.cart_items:
+        for item in cart.cart_item:
             product_id = item.product_id
             price = item.price
             quantity = item.quantity
             product = storage.get("Product", product_id)
             product_data = {
             "product_name": product.name,
-            "product_description": product.description,   
-            "product_image" : product.image
+            "product_description": product.description
             }
             return jsonify({"product": product_data, "quantity": quantity, "price": price})
     elif request.method == 'POST':
@@ -30,7 +31,7 @@ def get_Cart():
             return jsonify({"error": "Not a JSON"}), 400
         data = request.get_json()
         user_id = data.get('user_id')
-        cart = storage.__session.query(Cart).filter_by(user_id=user_id).first()
+        cart = sess.query(Cart).filter_by(user_id=user_id).first()
         cart_items = data.get('cart_items')
         if cart_items is None:
             return jsonify({"error": "Missing cart_items"}), 400
