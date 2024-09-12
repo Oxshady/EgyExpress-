@@ -6,3 +6,4 @@ from api.v1.views.users import *
 from api.v1.views.orders import *
 from api.v1.views.cart import *
 from api.v1.views.category import *
+from api.v1.views.subcategory import *
