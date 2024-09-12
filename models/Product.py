@@ -14,6 +14,7 @@ product_variation_combination = Table(
 class Product(BaseModel, base):
 	"""Product class"""
 	__tablename__ = 'products'
+	image: Mapped['str'] = mapped_column(String(60), nullable=False)
 	name: Mapped['str'] = mapped_column(String(60), nullable=False)
 	description: Mapped['str'] = mapped_column(String(100), nullable=False)
 	quantity: Mapped['int'] = mapped_column(Integer, nullable=False)
