@@ -25,6 +25,7 @@ class DBstorage:
         from models.variationsKey import VaiationKey
         from models.variationsValue import VaiationValue
         from models.Product import Product
+        from models.subCategory import Subcategory
         from models.order_item import OrderItem
         from models.Order import Order
         from models.Payment import Payment
@@ -49,6 +50,7 @@ class DBstorage:
         from models.variationsKey import VaiationKey
         from models.variationsValue import VaiationValue
         from models.Product import Product
+        from models.subCategory import Subcategory
         from models.order_item import OrderItem
         from models.Order import Order
         from models.Payment import Payment
@@ -58,6 +60,7 @@ class DBstorage:
         from models.users import User
         mapp = {
             "Category": Category,
+            "Subcategory": Subcategory,
             "Discount": Discount,
             "VaiationCombination": VaiationCombination,
             "VaiationKey": VaiationKey,
@@ -84,6 +87,7 @@ class DBstorage:
         from models.variationsKey import VaiationKey
         from models.variationsValue import VaiationValue
         from models.Product import Product
+        from models.subCategory import Subcategory
         from models.order_item import OrderItem
         from models.Order import Order
         from models.Payment import Payment
@@ -93,6 +97,7 @@ class DBstorage:
         from models.users import User
         mapp = {
             "Category": Category,
+            "Subcategory": Subcategory,
             "Discount": Discount,
             "VaiationCombination": VaiationCombination,
             "VaiationKey": VaiationKey,
