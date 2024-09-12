@@ -37,6 +37,10 @@ class DBstorage:
         session = scoped_session(sfactory)
         self.__session = session()
 
+    def post(self, obj):
+        self.__session.add(obj)
+        self.__session.commit()
+    
     def get_all(self, cls):
         from models.tracking import Tracking
         from models.Category import Category
