@@ -35,9 +35,78 @@ class DBstorage:
         base.metadata.create_all(self.__engine)
         sfactory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         session = scoped_session(sfactory)
-        print("hi")
         self.__session = session()
 
+    def get_all(self, cls):
+        from models.tracking import Tracking
+        from models.Category import Category
+        from models.Discount import Discount
+        from models.Comb import VaiationCombination
+        from models.variationsKey import VaiationKey
+        from models.variationsValue import VaiationValue
+        from models.Product import Product
+        from models.order_item import OrderItem
+        from models.Order import Order
+        from models.Payment import Payment
+        from models.CartItem import CartItem
+        from models.Cart import Cart
+        from models.Review import Review
+        from models.users import User
+        mapp = {
+            "Category": Category,
+            "Discount": Discount,
+            "VaiationCombination": VaiationCombination,
+            "VaiationKey": VaiationKey,
+            "VaiationValue": VaiationValue,
+            "Product": Product,
+            "OrderItem": OrderItem,
+            "Order": Order,
+            "Payment": Payment,
+            "CartItem": CartItem,
+            "Cart": Cart,
+            "Review": Review,
+            "User": User,
+        }
+        if str(cls) in mapp:
+            return self.__session.query(mapp[str(cls)]).all()
+        else:
+            return []
+    
+    def get(self, cls, id):
+        from models.tracking import Tracking
+        from models.Category import Category
+        from models.Discount import Discount
+        from models.Comb import VaiationCombination
+        from models.variationsKey import VaiationKey
+        from models.variationsValue import VaiationValue
+        from models.Product import Product
+        from models.order_item import OrderItem
+        from models.Order import Order
+        from models.Payment import Payment
+        from models.CartItem import CartItem
+        from models.Cart import Cart
+        from models.Review import Review
+        from models.users import User
+        mapp = {
+            "Category": Category,
+            "Discount": Discount,
+            "VaiationCombination": VaiationCombination,
+            "VaiationKey": VaiationKey,
+            "VaiationValue": VaiationValue,
+            "Product": Product,
+            "OrderItem": OrderItem,
+            "Order": Order,
+            "Payment": Payment,
+            "CartItem": CartItem,
+            "Cart": Cart,
+            "Review": Review,
+            "User": User,
+        }
+        if str(cls) in mapp:
+            return self.__session.query(mapp[str(cls)]).get(id)
+        else:
+            return None
+        
     def close(self):
         self.__session.remove()
 
