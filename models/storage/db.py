@@ -19,11 +19,23 @@ class DBstorage:
 
     def setup(self):
         from models.tracking import Tracking
+        from models.Category import Category
+        from models.Discount import Discount
+        from models.Comb import VaiationCombination
+        from models.variationsKey import VaiationKey
+        from models.variationsValue import VaiationValue
+        from models.Product import Product
+        from models.order_item import OrderItem
+        from models.Order import Order
+        from models.Payment import Payment
+        from models.CartItem import CartItem
+        from models.Cart import Cart
+        from models.Review import Review
         from models.users import User
-
         base.metadata.create_all(self.__engine)
         sfactory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         session = scoped_session(sfactory)
+        print("hi")
         self.__session = session()
 
     def close(self):
