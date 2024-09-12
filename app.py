@@ -32,7 +32,7 @@ payment = Payment(payment_type="visa",user=user)
 session.add(payment)
 session.commit()
 
-order = Order(total_price="200",user=user, payment=payment)
+order = Order(total_price=200,user=user, payment=payment)
 session.add(order)
 session.commit()
 
