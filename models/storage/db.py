@@ -8,7 +8,7 @@ class DBstorage:
     __session = None
 
     def __init__(self):
-        db = "Egy"
+        db = "egye"
         user = "shadi"
         passwd = "1"
         host = "localhost"
@@ -79,6 +79,9 @@ class DBstorage:
         else:
             return []
     
+    def delete(self, obj):
+        self.__session.delete(obj)
+        self.__session.commit()
     def get(self, cls, id):
         from models.tracking import Tracking
         from models.Category import Category
