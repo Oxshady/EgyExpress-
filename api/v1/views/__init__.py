@@ -8,3 +8,5 @@ from api.v1.views.cart import *
 from api.v1.views.category import *
 from api.v1.views.subcategory import *
 from api.v1.views.Reviews import *
+from api.v1.views.authentication import *
+from api.v1.views.refresh import *

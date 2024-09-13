@@ -1,6 +1,7 @@
 from api.v1.views import api_v1
 from flask import jsonify, request
 from models import storage
+
 @api_v1.route('/categories', methods=['GET'])
 def get_categories():
     return jsonify([category.to_dict() for category in storage.get_all("Category")])
@@ -14,4 +15,6 @@ def get_category_products():
     if category_id is None:
         return jsonify({"error": "Missing category_id"}), 400
     products = [product.to_dict() for product in storage.get("Category", category_id).product]
+    if products is None:
+        return jsonify({"error": "No products found"})
     return jsonify(products), 200

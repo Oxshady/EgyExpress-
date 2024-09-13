@@ -5,7 +5,9 @@ from models.Order import Order
 from models.order_item import OrderItem
 from models.Payment import Payment
 from models.tracking import Tracking
+from flask_jwt_extended import jwt_required, get_jwt_identity
 @api_v1.route('/orders', methods=['GET', 'POST'])
+@jwt_required()
 def get_orders():
     """ Get all orders """
     if request.method == 'GET':
@@ -14,7 +16,12 @@ def get_orders():
             return jsonify([])
         return jsonify([order.to_dict() for order in orders])
     elif request.method == 'POST':
-        user = storage.get_all("User")[0]
+        user_id = get_jwt_identity()
+        user = storage.get("User", user_id)
+        if user is None:
+            return jsonify({"error": "User not found"}), 404
+        if user.cart is None or len(user.cart.cart_item) == 0:
+            return jsonify({"error": "Cart is empty"})
         cart = user.cart
         cart_id = cart.id
         total_price = 0
@@ -23,14 +30,14 @@ def get_orders():
             order_data.append({"product":item.product, "quantity": item.quantity, "price": item.price})
             total_price += item.price
         payment = Payment(payment_type="cash", user=user)
-        storage.post(payment)
+        payment.save()
         order = Order(total_price=total_price, user=user, payment=payment)
-        storage.post(order)
+        order.save()
         for item in order_data:
             order_item = OrderItem(quantity=item.get('quantity'), price=item.get('price'), order=order, product=item.get('product'))
-            storage.post(order_item)
+            order_item.save()
         tracking = Tracking(status="delivered", delivery_address="cairo", user=user, order=order)
-        storage.post(tracking)
+        tracking.save()
         for item in cart.cart_item:
-            storage.delete(item)
+            item.delete()
         return jsonify({"success":True}), 201

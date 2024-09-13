@@ -3,19 +3,18 @@ from flask import jsonify, request
 from models import storage
 from models.CartItem import CartItem
 from models.Cart import Cart
+from flask_jwt_extended import jwt_required, get_jwt_identity
 @api_v1.route('/cart', methods=['GET', 'POST'])
+@jwt_required()
 def get_Cart():
     """ Get Cart """
     if request.method == 'GET':
         from models.users import User
-        sess = storage.get_session()
-        user = sess.query(User).first()
-        user_id = user.id
-        if user_id is None:
-            return jsonify([])
-        cart = sess.query(Cart).filter_by(user_id=user_id).first()
+        user_id = get_jwt_identity()
+        user = storage.get("User", user_id)
+        cart = storage.filter_one("Cart", user_id=user_id)
         if cart is None:
-            return jsonify([])
+            return jsonify({"error": "Cart not found"}), 404
         for item in cart.cart_item:
             product_id = item.product_id
             price = item.price
@@ -30,8 +29,10 @@ def get_Cart():
         if not request.is_json:
             return jsonify({"error": "Not a JSON"}), 400
         data = request.get_json()
-        user_id = data.get('user_id')
-        cart = sess.query(Cart).filter_by(user_id=user_id).first()
+        if data is None:
+            return jsonify({"error": "Not a JSON"}), 400
+        user_id = get_jwt_identity()
+        cart = storage.filter_one("Cart", user_id=user_id)
         cart_items = data.get('cart_items')
         if cart_items is None:
             return jsonify({"error": "Missing cart_items"}), 400
@@ -46,5 +47,5 @@ def get_Cart():
             if product is None:
                 return jsonify({"error": "Product not found"}), 404
             cart_item = CartItem(quantity=item.get('quantity'), price=item.get('price'), cart=cart, product=product)
-            storage.post(cart_item)
+            cart_item.save()
         return None
