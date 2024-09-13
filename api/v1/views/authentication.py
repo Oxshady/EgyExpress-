@@ -2,6 +2,7 @@
 """ registration and login authentication """
 from models.users import User
 from models import storage
+from models.Cart import Cart
 from api.v1.views import api_v1
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token
@@ -27,6 +28,8 @@ def signup():
 
     new_user = User(first_name=first_name,last_name=last_name, phoneNumber=phoneNumber, address=address,email=email, password=password)
     new_user.save()
+    cart = Cart(description="shadi",user=new_user)
+    cart.save()
     return jsonify({"message": "User registered successfully"}), 201
 
 @api_v1.route('/login', methods=['POST', 'GET'], strict_slashes=False)
