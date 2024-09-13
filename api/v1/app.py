@@ -9,4 +9,4 @@ jwt = JWTManager(app)
 app.register_blueprint(api_v1)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 if __name__ == '__main__':
-	app.run()
+	app.run(debug=True)
