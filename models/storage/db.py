@@ -56,11 +56,11 @@ class DBstorage:
 
     def filter_group(self, cls, **kwargs):
         if str(cls) in mapp:
-            self.__session.query(mapp[str(cls)]).filter_by(**kwargs).all()
+            return self.__session.query(mapp[str(cls)]).filter_by(**kwargs).all()
     
     def filter_one(self, cls, **kwargs):
         if str(cls) in mapp:
-            self.__session.query(mapp[str(cls)]).filter_by(**kwargs).first()
+            return self.__session.query(mapp[str(cls)]).filter_by(**kwargs).first()
     
     def post(self, obj):
         self.__session.add(obj)
