@@ -15,7 +15,6 @@ def get_orders():
         return jsonify([order.to_dict() for order in orders])
     elif request.method == 'POST':
         user = storage.get_all("User")[0]
-        return_data = "hi"
         cart = user.cart
         cart_id = cart.id
         total_price = 0
@@ -34,4 +33,4 @@ def get_orders():
         storage.post(tracking)
         for item in cart.cart_item:
             storage.delete(item)
-        return jsonify(return_data)
+        return jsonify({"success":True}), 201
