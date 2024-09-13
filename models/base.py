@@ -21,10 +21,17 @@ class BaseModel:
             self.created_at = datetime.utcnow()
         if not self.updated_at:
             self.updated_at = datetime.utcnow()
+
     def save(self):
         """ Save the current instance to the database """
         from models import storage
         storage.post(self)
+
+    def delete(self):
+        """ Delete the current instance from the database """
+        from models import storage
+        storage.delete(self)
+
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
