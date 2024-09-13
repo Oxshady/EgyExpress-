@@ -18,29 +18,20 @@ def get_orders():
         return_data = "hi"
         cart = user.cart
         cart_id = cart.id
-        print(cart_id)
         total_price = 0
         order_data = []
         for item in cart.cart_item:
-            print(item.product_id)
             order_data.append({"product":item.product, "quantity": item.quantity, "price": item.price})
-            print(item.product)
             total_price += item.price
         payment = Payment(payment_type="cash", user=user)
         storage.post(payment)
-        print(payment.id)
         order = Order(total_price=total_price, user=user, payment=payment)
         storage.post(order)
-        print(order.to_dict())
         for item in order_data:
             order_item = OrderItem(quantity=item.get('quantity'), price=item.get('price'), order=order, product=item.get('product'))
             storage.post(order_item)
-        print("********************************")
-        print(len(order.order_item))
-        print("*****************************")
         tracking = Tracking(status="delivered", delivery_address="cairo", user=user, order=order)
         storage.post(tracking)
-        print(order.tracking)
-        for item in order.order_item:
-            print(item.product)
+        for item in cart.cart_item:
+            storage.delete(item)
         return jsonify(return_data)
