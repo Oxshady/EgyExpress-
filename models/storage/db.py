@@ -39,7 +39,7 @@ class DBstorage:
     __session = None
 
     def __init__(self):
-        db = "SHADI"
+        db = "egye"
         user = "shadi"
         passwd = "1"
         host = "localhost"

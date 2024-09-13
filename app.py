@@ -19,61 +19,45 @@ from models.storage.db import DBstorage
 
 d = DBstorage()
 d.setup()
-session = d.get_session()
 user = User(first_name="shadi", last_name="shadi", phoneNumber="123456789", address="cairo", email="shadi@hotmail.com",password="123456")
-session.add(user)
-session.commit()
+user.save()
 
 cart = Cart(description="asdsadsads",user=user)
-session.add(cart)
-session.commit()
+cart.save()
 
 payment = Payment(payment_type="visa",user=user)
-session.add(payment)
-session.commit()
+payment.save()
 
 order = Order(total_price=200,user=user, payment=payment)
-session.add(order)
-session.commit()
+order.save()
 
 category = Category(name="sadasd", description="sadads")
-session.add(category)
-session.commit()
+category.save()
 
 sub = Subcategory(name="sadasd", description="sadasd", category=category)
-session.add(sub)
-session.commit()
+sub.save()
 
 
 discount = Discount(rate="20")
-session.add(discount)
-session.commit()
+discount.save()
+
 key = VaiationKey(key="sadasd")
-session.add(key)
-session.commit()
+key.save()
 value = VaiationValue(value="sadasd")
-session.add(value)
-session.commit()
+value.save()
 variation = VaiationCombination(key=key, value=value)
-session.add(variation)
-session.commit()
+variation.save()
 
 product = Product(name="sadasd", price=200, description="sadasd", category=category,subcategory=sub, quantity=2, discount=discount, variation_combination=[variation])
-session.add(product)
-session.commit()
-
+product.save()
 cart_item = CartItem(quantity=2, price=200,cart=cart, product=product)
-session.add(cart_item)
-session.commit()
+cart_item.save()
 
 orderItem = OrderItem(quantity=2, order=order, price=200, product=product)
-session.add(orderItem)
-session.commit()
+orderItem.save()
 
 tracking = Tracking(status="delivered",delivery_address="sadasd",user=user, order=order)
-session.add(tracking)
-session.commit()
+tracking.save()
 
 r = Review(rate=5, description="good", product=product,user=user)
-session.add(r)
-session.commit()
+r.save()
