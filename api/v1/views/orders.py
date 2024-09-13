@@ -3,7 +3,7 @@ from flask import jsonify
 from models import storage
 from models.Order import Order
 
-@api_v1.route('/orders', methods=['GET'])
+@api_v1.route('/orders', methods=['GET', 'POST'])
 def get_orders():
     """ Get all orders """
     orders = storage.get_all("Order")
