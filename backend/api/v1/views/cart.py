@@ -15,6 +15,8 @@ def get_Cart():
         cart = storage.filter_one("Cart", user_id=user_id)
         if cart is None:
             return jsonify({"error": "Cart not found"}), 404
+        if len(cart.cart_item) == 0:
+            return jsonify({"error": "Cart is empty"})
         for item in cart.cart_item:
             product_id = item.product_id
             price = item.price
@@ -33,19 +35,18 @@ def get_Cart():
             return jsonify({"error": "Not a JSON"}), 400
         user_id = get_jwt_identity()
         cart = storage.filter_one("Cart", user_id=user_id)
-        cart_items = data.get('cart_items')
-        if cart_items is None:
-            return jsonify({"error": "Missing cart_items"}), 400
-        for item in cart_items:
-            if item.get('product_id') is None:
-                return jsonify({"error": "Missing product_id"}), 400
-            if item.get('quantity') is None:
-                return jsonify({"error": "Missing quantity"}), 400
-            if item.get('price') is None:
-                return jsonify({"error": "Missing price"}), 400
-            product = storage.get("Product", item.get('product_id'))
-            if product is None:
-                return jsonify({"error": "Product not found"}), 404
-            cart_item = CartItem(quantity=item.get('quantity'), price=item.get('price'), cart=cart, product=product)
-            cart_item.save()
-        return None
+        product_id = data.get('product_id')
+        if product_id is None:
+            return jsonify({"error": "Missing product_id"}), 400
+        quantity = data.get('quantity')
+        if quantity is None:
+            return jsonify({"error": "Missing quantity"}), 400
+        price = data.get('price')
+        if price is None:
+            return jsonify({"error": "Missing price"}), 400
+        product = storage.get("Product", product_id)
+        if product is None:
+            return jsonify({"error": "Product not found"}), 404
+        cart_item = CartItem(quantity=quantity, price=price, cart=cart, product=product)
+        cart_item.save()
+        return jsonify({"success":True}), 201
