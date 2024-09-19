@@ -22,21 +22,20 @@ def get_orders():
             return jsonify({"error": "User not found"}), 404
         if user.cart is None or len(user.cart.cart_item) == 0:
             return jsonify({"error": "Cart is empty"})
+        data = request.get_json()
         cart = user.cart
         cart_id = cart.id
-        total_price = 0
         order_data = []
         for item in cart.cart_item:
             order_data.append({"product":item.product, "quantity": item.quantity, "price": item.price})
-            total_price += item.price
-        payment = Payment(payment_type="cash", user=user)
+        payment = Payment(payment_type=data.get('payment_type') ,user=user)
         payment.save()
-        order = Order(total_price=total_price, user=user, payment=payment)
+        order = Order(total_price=data.get('total_price'), user=user, payment=payment)
         order.save()
         for item in order_data:
             order_item = OrderItem(quantity=item.get('quantity'), price=item.get('price'), order=order, product=item.get('product'))
             order_item.save()
-        tracking = Tracking(status="delivered", delivery_address="cairo", user=user, order=order)
+        tracking = Tracking(status="delivered", delivery_address=data.get('delivery_address'), user=user, order=order)
         tracking.save()
         for item in cart.cart_item:
             item.delete()

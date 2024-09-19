@@ -19,10 +19,10 @@ from models.storage.db import DBstorage
 
 d = DBstorage()
 d.setup()
-user = User(first_name="shadi", last_name="shadi", phoneNumber="123456789", address="cairo", email="shadi@hotmail.com",password="123456")
+user = User(first_name="shadi", last_name="mahmoud", phoneNumber="01020367515", address="cairo", email="shadi@hotmail.com",password="123456")
 user.save()
 
-cart = Cart(description="asdsadsads",user=user)
+cart = Cart(description=f"user {user.first_name}",user=user)
 cart.save()
 
 payment = Payment(payment_type="visa",user=user)
@@ -31,24 +31,30 @@ payment.save()
 order = Order(total_price=200,user=user, payment=payment)
 order.save()
 
-category = Category(name="sadasd", description="sadads")
+category = Category(name="electronics", description="electronics devices")
 category.save()
 
-sub = Subcategory(name="sadasd", description="sadasd", category=category)
+sub = Subcategory(name="mobiles", description="mobiles devices", category=category)
 sub.save()
 
 
 discount = Discount(rate="20")
 discount.save()
 
-key = VaiationKey(key="sadasd")
+key = VaiationKey(key="color")
 key.save()
-value = VaiationValue(value="sadasd")
+value = VaiationValue(value="black")
+value.save()
+variation = VaiationCombination(key=key, value=value)
+variation.save()
+key = VaiationKey(key="size")
+key.save()
+value = VaiationValue(value="large")
 value.save()
 variation = VaiationCombination(key=key, value=value)
 variation.save()
 
-product = Product(name="sadasd", price=200, description="sadasd", category=category,subcategory=sub, quantity=2, discount=discount, variation_combination=[variation])
+product = Product(image="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",name="iphone 10", price=200, description="iphone 10 device", category=category,subcategory=sub, quantity=2, discount=discount, variation_combination=[variation])
 product.save()
 cart_item = CartItem(quantity=2, price=200,cart=cart, product=product)
 cart_item.save()
@@ -56,7 +62,7 @@ cart_item.save()
 orderItem = OrderItem(quantity=2, order=order, price=200, product=product)
 orderItem.save()
 
-tracking = Tracking(status="delivered",delivery_address="sadasd",user=user, order=order)
+tracking = Tracking(status="delivered",delivery_address="gize, 6 october",user=user, order=order)
 tracking.save()
 
 r = Review(rate=5, description="good", product=product,user=user)

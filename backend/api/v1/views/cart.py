@@ -11,12 +11,12 @@ def get_Cart():
     if request.method == 'GET':
         from models.users import User
         user_id = get_jwt_identity()
-        user = storage.get("User", user_id)
         cart = storage.filter_one("Cart", user_id=user_id)
         if cart is None:
-            return jsonify({"error": "Cart not found"}), 404
+            return jsonify([]), 404
         if len(cart.cart_item) == 0:
-            return jsonify({"error": "Cart is empty"})
+            return jsonify([])
+        dt = []
         for item in cart.cart_item:
             product_id = item.product_id
             price = item.price
@@ -26,7 +26,8 @@ def get_Cart():
             "product_name": product.name,
             "product_description": product.description
             }
-            return jsonify({"product": product_data, "quantity": quantity, "price": price})
+            dt.append({"product": product.id, "quantity": quantity, "price": price})
+        return jsonify(dt), 200
     elif request.method == 'POST':
         if not request.is_json:
             return jsonify({"error": "Not a JSON"}), 400

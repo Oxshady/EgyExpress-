@@ -23,7 +23,7 @@ def reviews():
         product_id = data.get('product_id')
         product = storage.get("Product", product_id)
         if product is None:
-            return jsonify({"error": "Product not found"}), 404
+            return jsonify({"error": "Product not found"}), 400
         review = Review(rate=rate, description=description, user=user, product=product)
         review.save()
         return jsonify({"success":True}), 201

@@ -15,6 +15,7 @@ class Product(BaseModel, base):
 	"""Product class"""
 	__tablename__ = 'products'
 	name: Mapped['str'] = mapped_column(String(60), nullable=False)
+	image: Mapped['str'] = mapped_column(String(100), nullable=False)	
 	description: Mapped['str'] = mapped_column(String(100), nullable=False)
 	quantity: Mapped['int'] = mapped_column(Integer, nullable=False)
 	price: Mapped['float'] = mapped_column(Float, nullable=False)

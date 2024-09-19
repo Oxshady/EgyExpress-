@@ -1,0 +1,103 @@
+/* Container for the entire order page */
+.order_items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+/* Container for the cart items */
+.cart_item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+/* Product details */
+.cart_item h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.cart_item p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Error message */
+.order_items h2 {
+  color: #ff4d4d;
+  text-align: center;
+}
+
+/* Total amount */
+.total {
+  font-size: 1.5em;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* Payment section */
+.payment {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Form elements */
+.payment form {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment label {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.payment select,
+.payment input {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.payment input {
+  width: calc(100% - 22px); /* Adjust width to account for padding and border */
+}
+
+/* Error message in form */
+.payment p {
+  color: #ff4d4d;
+  margin-top: 10px;
+}
+
+/* Confirm button */
+.confirm {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm:hover {
+  background-color: #0056b3;
+}

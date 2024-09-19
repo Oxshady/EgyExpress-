@@ -4,17 +4,28 @@ from models import storage
 
 @api_v1.route('/categories', methods=['GET'])
 def get_categories():
-    return jsonify([category.to_dict() for category in storage.get_all("Category")])
+    categories = storage.get_all("Category")
+    try:
+        if categories is None:
+            return jsonify([]), 400
+        return jsonify([category.to_dict() for category in categories]), 200
+    except Exception as e:
+        storage.roll()
+        return jsonify([]), 400
 
-@api_v1.route('/categories/products', methods=['GET', 'POST'])
-def get_category_products():
-    data = request.get_json()
-    if data is None:
-        return jsonify({"error": "Not a JSON"}), 400
-    category_id = data.get('category_id')
-    if category_id is None:
-        return jsonify({"error": "Missing category_id"}), 400
-    products = [product.to_dict() for product in storage.get("Category", category_id).product]
-    if products is None:
-        return jsonify({"error": "No products found"})
-    return jsonify(products), 200
+
+@api_v1.route('/products/categories/<category_id>', methods=['GET'])
+def get_category_products(category_id):
+    try:
+        cid = category_id
+        if cid is None:
+            print("Category ID is None")
+            print(cid)
+            return jsonify([]), 400
+        products = [p.to_dict() for p in storage.get("Category", cid).product]
+        if products is None:
+            return jsonify([]), 400
+        return jsonify(products), 200
+    except Exception as e:
+        storage.roll()
+        return jsonify([]), 400

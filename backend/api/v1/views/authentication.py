@@ -5,9 +5,10 @@ from models import storage
 from models.Cart import Cart
 from api.v1.views import api_v1
 from flask import jsonify, request
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity
+from functools import wraps
 
-
+ADMIN_EMAILS = ['ahmed@gmail.com', 'shady@gmail.com', 'sondos@gmail.com']
 
 @api_v1.route('/signup', methods=['POST', 'GET'], strict_slashes=False)
 def signup():
@@ -17,7 +18,7 @@ def signup():
     
     first_name = data.get('first_name')
     last_name = data.get('last_name')
-    phoneNumber = data.get('phoneNumber')
+    phoneNumber = data.get('phonenumber')
     address = data.get('address')
     email = data.get('email')
     password = data.get('password')
@@ -45,3 +46,25 @@ def login():
     access_token = create_access_token(identity=user.id)
     refresh_token = create_refresh_token(identity=user.id)
     return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Get the user id from the JWT token
+        user_id = get_jwt_identity()
+
+        # Retrieve the user object from the storage using user_id
+        user = storage.get_by_attributes(User, id=user_id)
+
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        # Check if the user's email is in the list of admin emails
+        if user.email not in ADMIN_EMAILS:
+            return jsonify({'message': 'User is not an admin'}), 403
+
+        # Call the original function if the user is admin
+        return f(*args, **kwargs)
+
+    return decorated_function

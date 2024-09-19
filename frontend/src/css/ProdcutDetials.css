@@ -1,0 +1,93 @@
+/* Container for the entire product details page */
+.product_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Container for the product information */
+.product_info {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Product image */
+.product_info img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+/* Product details */
+.product_details h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product_details p {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Counter container */
+.counter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Counter buttons */
+.counter button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.counter button:hover {
+  background-color: #0056b3;
+}
+
+/* Counter images */
+.counter img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Counter value */
+.counter span {
+  font-size: 1.2em;
+  margin: 0 10px;
+  color: #333;
+}
+
+/* Add to Cart button */
+.AddBtn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.AddBtn:hover {
+  background-color: #218838;
+}
