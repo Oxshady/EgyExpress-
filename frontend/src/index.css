@@ -6,14 +6,40 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  background-color:#3e3e3e;
+  background: url("./assests//gray_back.jpg") no-repeat center center/cover;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 * {
   margin: 0;
   box-sizing: border-box;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  body {
+    background-color: #4e4e4e;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    background-color: #5e5e5e;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-color: #6e6e6e;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    background-color: #7e7e7e;
+  }
 }

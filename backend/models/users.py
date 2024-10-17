@@ -21,7 +21,7 @@ class User(BaseModel, base):
     from models.Payment import Payment
     payment: Mapped[List["Payment"]] = relationship(Payment, backref="user", cascade='all, delete-orphan')
     from models.Cart import Cart
-    cart: Mapped["Cart"] = relationship(Cart, uselist=False, backref=backref("user", uselist=False))
+    cart: Mapped["Cart"] = relationship(Cart, uselist=False, backref=backref("user", uselist=False), cascade="all, delete-orphan")
     from models.Review import Review
     review: Mapped[List["Review"]] = relationship(Review, backref="user", cascade='all, delete-orphan')
     def __init__(self, *args, **kwargs) -> None:

@@ -1,4 +1,5 @@
-import '../css/Slider.css';
+import "../css/Slider.css";
+
 function Slider() {
   return (
     <>
@@ -54,4 +55,5 @@ function Slider() {
     </>
   );
 }
+
 export default Slider;

@@ -13,7 +13,7 @@ def get_Cart():
         user_id = get_jwt_identity()
         cart = storage.filter_one("Cart", user_id=user_id)
         if cart is None:
-            return jsonify([]), 404
+            return jsonify([]), 450
         if len(cart.cart_item) == 0:
             return jsonify([])
         dt = []

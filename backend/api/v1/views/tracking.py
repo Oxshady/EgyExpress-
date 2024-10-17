@@ -13,4 +13,4 @@ def tracking():
         tracking = [track.to_dict() for track in user.tracking]
         if tracking is None:
             return jsonify([])
-        return jsonify([track.to_dict() for track in user.tracking]), 200
+        return jsonify(tracking), 200

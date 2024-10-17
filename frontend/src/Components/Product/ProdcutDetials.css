@@ -1,0 +1,229 @@
+/* Container for the entire product details page */
+.product_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Container for the product information */
+.product_info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Product image */
+.product_info img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+/* Product details */
+.product_details h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product_details p {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Counter container */
+.counter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Counter buttons */
+.counter button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.counter button:hover {
+  background-color: #0056b3;
+}
+
+/* Counter images */
+.counter img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Counter value */
+.counter span {
+  font-size: 1.2em;
+  margin: 0 10px;
+  color: #333;
+}
+
+/* Add to Cart button */
+.AddBtn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.AddBtn:hover {
+  background-color: #218838;
+}
+
+/* Add Review button */
+.AddReviewBtn {
+  background-color: #ffc107;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.AddReviewBtn:hover {
+  background-color: #e0a800;
+}
+
+/* Review section */
+.review_section {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .product_info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product_info img {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .product_details h1 {
+    font-size: 1.5em;
+  }
+
+  .product_details p {
+    font-size: 0.9em;
+  }
+
+  .counter button {
+    padding: 8px;
+  }
+
+  .counter span {
+    font-size: 1em;
+  }
+
+  .AddBtn {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .AddReviewBtn {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .review_section {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .product_info {
+    padding: 15px;
+  }
+
+  .product_details h1 {
+    font-size: 1.2em;
+  }
+
+  .product_details p {
+    font-size: 0.8em;
+  }
+
+  .counter button {
+    padding: 6px;
+  }
+
+  .counter span {
+    font-size: 0.9em;
+  }
+
+  .AddBtn {
+    padding: 6px 12px;
+    font-size: 0.8em;
+  }
+
+  .AddReviewBtn {
+    padding: 6px 12px;
+    font-size: 0.8em;
+  }
+
+  .review_section {
+    padding: 10px;
+  }
+}
+
+.popout-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popout-message .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}

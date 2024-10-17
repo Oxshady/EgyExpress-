@@ -58,11 +58,13 @@ try {
           Authorization: `Bearer ${token}`,
         },
       });
+
   }
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-
+  console.log("respone");
+    console.log(response);
   return await response.json();
 } catch (error) {
   console.error('Fertch Error', error);

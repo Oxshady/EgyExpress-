@@ -1,19 +1,22 @@
-
-import './App.css';
-import About from './Components/About'; 
-import ProductDtials from './Components/ProductDetials';
+import "./App.css";
+import About from "./Components/About";
+import ProductDtials from "./Components/Product/ProductDetials";
 import Login from "./Components/Register/Login";
 import Register from "./Components/Register/Register";
 import Logout from "./Components/Register/Logout";
 import PrivateRoute from "./Components/PrivateRoute";
-import Cart from "./Components/Cart";
+import Cart from "./Components/Cart/Cart";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import RootPage from './pages/RootPage';
-import Home from './pages/Home';
-import Profile from './Components/Profile';
-import Order from './Components/Order';
-import Tracking from './Components/Tracking';
-import CategroiesList from './Components/CategroiesList'
+import RootPage from "./pages/RootPage";
+import Home from "./pages/Home";
+import Profile from "./Components/Profile/Profile";
+import Order from "./Components/Cart/Order";
+import Tracking from "./Components/Cart/Tracking";
+import CategroiesList from "./Components/Product/CategroiesList";
+import EditAcc from "./Components/Profile/EditAcc";
+import ChangePassword from "./Components/Profile/ChangePassword";
+import DeleteAcount from "./Components/Register/DeleteAcount";
+import Review from "./Components/Review/Review";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -69,11 +72,47 @@ const router = createBrowserRouter([
       },
       {
         path: "tracking",
-        element: <Tracking />,
+        element: (
+          <PrivateRoute>
+            <Tracking />
+          </PrivateRoute>
+        ),
       },
       {
         path: "categories",
         element: <CategroiesList />,
+      },
+      {
+        path: "edit-account",
+        element: (
+          <PrivateRoute>
+            <EditAcc />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "change-password",
+        element: (
+          <PrivateRoute>
+            <ChangePassword />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "delete-acount",
+        element: (
+          <PrivateRoute>
+            <DeleteAcount />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-review",
+        element: (
+          <PrivateRoute>
+            <Review />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -82,7 +121,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }

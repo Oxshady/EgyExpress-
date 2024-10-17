@@ -1,0 +1,49 @@
+.about-container {
+  padding: 20px;
+  text-align: center;
+  background:url("../assests/gray_back.jpg"); /* Dark brown background to match the theme */
+  color: #e6e6e6; /* Golden yellow text for visibility */
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.about-container.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.about-subtitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 40px 0 20px;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.about-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.about-list li {
+  margin-bottom: 10px;
+}
